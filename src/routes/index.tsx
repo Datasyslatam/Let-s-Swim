@@ -10,6 +10,7 @@ import kidsClass from "@/assets/kids-class.jpg";
 import advanced from "@/assets/advanced.jpg";
 import events from "@/assets/events.jpg";
 import logo from "@/assets/logo.png";
+import serviceStore from "@/assets/service-store.jpg";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -133,7 +134,7 @@ function About() {
     <section id="nosotros" className="py-20 lg:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
         <img src={kidsClass} alt="Clase de natación con niños e instructor" width={1400} height={1000} loading="lazy"
-          className="rounded-3xl shadow-xl object-cover w-full aspect-[4/3]" />
+          className="rounded-3xl shadow-xl object-cover object-top w-full aspect-[4/4]" />
         <div>
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">Nuestra filosofía</span>
           <h2 className="mt-3 text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground">
@@ -226,7 +227,7 @@ function Levels() {
           {levels.map((lv, i) => (
             <div key={lv.n} className={`grid lg:grid-cols-2 gap-10 items-center ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>
               <div className="relative">
-                <img src={lv.img} alt={lv.title} loading="lazy" className="rounded-3xl shadow-xl object-cover w-full aspect-[4/3]" />
+                <img src={lv.img} alt={lv.title} loading="lazy" className="rounded-3xl shadow-xl object-cover object-top w-full aspect-[4/4]" />
                 <div className="absolute -top-5 -left-5 bg-primary text-primary-foreground rounded-2xl w-20 h-20 flex items-center justify-center text-2xl font-extrabold shadow-lg">
                   {lv.n}
                 </div>
@@ -266,7 +267,7 @@ function Services() {
       points: ["Cursos vacacionales acuáticos", "Fiestas y celebraciones infantiles", "Planes: Básico, Estándar y Premium"],
     },
     {
-      icon: <ShoppingBag />, title: "Tienda y Material Didáctico", img: advanced,
+      icon: <ShoppingBag />, title: "Tienda y Material Didáctico", img: serviceStore,
       points: ["Equipamiento avalado por profesionales", "Accesorios para práctica cómoda y segura", "Material didáctico exclusivo de aprendizaje"],
     },
   ];
@@ -280,7 +281,7 @@ function Services() {
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           {services.map(s => (
             <article key={s.title} className="group bg-white rounded-3xl overflow-hidden border border-border hover:shadow-2xl transition-all duration-300">
-              <div className="aspect-[16/9] overflow-hidden">
+              <div className="aspect-[15/15] overflow-hidden">
                 <img src={s.img} alt={s.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-6 lg:p-7">
