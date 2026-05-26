@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Waves, Shield, GraduationCap, Heart, PartyPopper, ShoppingBag,
   Baby, Users, User, Check, Phone, Mail, MapPin, Facebook,
@@ -11,6 +11,9 @@ import advanced from "@/assets/advanced.jpg";
 import events from "@/assets/events.jpg";
 import logo from "@/assets/logo.png";
 import serviceStore from "@/assets/service-store.jpg";
+import heroVideo1 from "@/assets/hero-video-1.mp4";
+import heroVideo2 from "@/assets/hero-video-2.mp4";
+import heroVideo3 from "@/assets/hero-video-3.mp4";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -66,18 +69,55 @@ function Nav() {
 }
 
 function Hero() {
+  const videos = [heroVideo1, heroVideo2, heroVideo3];
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(prev => (prev + 1) % videos.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section id="top" className="relative pt-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-cyan-50 to-blue-100" />
-      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <span className="inline-flex items-center gap-2 bg-white/80 text-primary text-xs font-semibold px-4 py-1.5 rounded-full border border-primary/20">
+    <section id="top" className="relative pt-16 overflow-hidden min-h-[90vh] flex items-center">
+      {/* Videos de fondo */}
+      {videos.map((src, i) => (
+        <video
+          key={src}
+          src={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"}`}
+        />
+      ))}
+
+      {/* Overlay oscuro */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* Indicadores */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        {videos.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-8 bg-white" : "w-3 bg-white/50"}`}
+          />
+        ))}
+      </div>
+
+      {/* Contenido */}
+      <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 py-16 lg:py-24 w-full">
+        <div className="max-w-3xl">
+          <span className="inline-flex items-center gap-2 bg-white/20 backdrop-blur text-white text-xs font-semibold px-4 py-1.5 rounded-full border border-white/30">
             <Sparkles size={14} /> Escuela profesional en Barranquilla
           </span>
-          <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.05]">
-            Un niño que aprende a nadar, <span className="text-primary">es un niño sin temores.</span>
+          <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.05]">
+            Un niño que aprende a nadar, <span className="text-cyan-300">es un niño sin temores.</span>
           </h1>
-          <p className="mt-6 text-lg text-foreground/70 max-w-xl leading-relaxed">
+          <p className="mt-6 text-lg text-white/85 max-w-xl leading-relaxed">
             Formación acuática integral desde los <strong>6 meses</strong>, liderada exclusivamente por entrenadores profesionales certificados en pedagogía infantil, educación física y entrenamiento deportivo.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -86,7 +126,7 @@ function Hero() {
               Agenda tu clase de prueba
             </a>
             <a href="#servicios"
-              className="inline-flex items-center gap-2 bg-white text-primary px-7 py-3.5 rounded-full font-semibold border-2 border-primary/20 hover:border-primary transition">
+              className="inline-flex items-center gap-2 bg-white/15 backdrop-blur text-white px-7 py-3.5 rounded-full font-semibold border-2 border-white/30 hover:bg-white/25 transition">
               Ver servicios
             </a>
           </div>
@@ -97,22 +137,10 @@ function Hero() {
               { n: "100%", l: "Profesional" },
             ].map(s => (
               <div key={s.l}>
-                <div className="text-2xl lg:text-3xl font-extrabold text-primary">{s.n}</div>
-                <div className="text-xs text-foreground/60 mt-1">{s.l}</div>
+                <div className="text-2xl lg:text-3xl font-extrabold text-white">{s.n}</div>
+                <div className="text-xs text-white/60 mt-1">{s.l}</div>
               </div>
             ))}
-          </div>
-        </div>
-        <div className="relative">
-          <div className="absolute -inset-4 bg-gradient-to-tr from-primary/30 to-cyan-300/30 rounded-[2.5rem] blur-2xl" />
-          <img src={heroBaby} alt="Bebé nadando con su madre en una piscina segura" width={1600} height={1200}
-            className="relative rounded-[2rem] shadow-2xl object-cover w-full aspect-[4/5] lg:aspect-[5/6]" />
-          <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 max-w-[260px]">
-            <div className="bg-primary/10 text-primary p-2 rounded-xl"><Shield size={22} /></div>
-            <div>
-              <div className="font-bold text-sm text-foreground">100% Seguro</div>
-              <div className="text-xs text-foreground/60">Entrenadores certificados</div>
-            </div>
           </div>
         </div>
       </div>
