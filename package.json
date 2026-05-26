@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
+    "deploy": "npm run build && npx wrangler deploy -c dist/server/wrangler.json",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
