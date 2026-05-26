@@ -29,13 +29,13 @@ En Railway, usa estas opciones:
 
 - Build command: `npm run build`
 - Start command: `npm start`
-- Node runtime: `22.12.x` o superior
+- Node runtime: `22.22.x` o superior
 
 Railway también puede detectar el `package.json` y respetar estas configuraciones:
 
-- `packageManager`: `npm@10`
-- `engines.node`: `>=22.12.0`
-- `.nvmrc`: `22.12.0`
+- `packageManager`: `npm@10.9.0`
+- `engines.node`: `>=22.22.2`
+- `.nvmrc`: `22.22.2`
 
 ## Notas importantes
 
