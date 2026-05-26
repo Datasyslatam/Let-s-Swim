@@ -197,9 +197,9 @@ function MissionCard({ icon, title, text }: { icon: React.ReactNode; title: stri
 
 function Modalities() {
   const items = [
-    { icon: <Users size={28} />, title: "Grupales", desc: "Espacios dinámicos e interactivos, ideales para motivarse en equipo, socializar y aprender en un entorno seguro." },
     { icon: <Users size={28} />, title: "Personalizadas", desc: "Flexibilidad y atención compartida en grupos muy reducidos, garantizando un alto estándar de cuidado y progreso." },
     { icon: <User size={28} />, title: "Individuales", desc: "Enfoque 100% exclusivo con un profesional dedicado a acelerar el aprendizaje y maximizar la autoconfianza." },
+    { icon: <Users size={28} />, title: "Grupales", desc: "Espacios dinámicos e interactivos, ideales para motivarse en equipo, socializar y aprender en un entorno seguro." },
   ];
   return (
     <section id="modalidades" className="py-20 lg:py-28 bg-gradient-to-b from-white to-sky-50">
