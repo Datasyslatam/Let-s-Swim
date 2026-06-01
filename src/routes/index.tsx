@@ -11,9 +11,14 @@ import advanced from "@/assets/advanced.jpg";
 import events from "@/assets/events.jpg";
 import logo from "@/assets/logo.png";
 import serviceStore from "@/assets/service-store.jpg";
-import heroVideo1 from "@/assets/hero-video-1.mp4";
-import heroVideo2 from "@/assets/hero-video-2.mp4";
-import heroVideo3 from "@/assets/hero-video-3.mp4";
+import heroVideo1 from "@/assets/hero-video-1.mov";
+import heroVideo2 from "@/assets/hero-video-2.mov";
+import heroVideo3 from "@/assets/hero-video-3.mov";
+import heroVideo4 from "@/assets/hero-video-4.mov";
+import heroVideo5 from "@/assets/hero-video-5.mov";
+import heroVideo6 from "@/assets/hero-video-6.mov";
+import heroVideo7 from "@/assets/hero-video-7.mov";
+import heroVideo8 from "@/assets/hero-video-8.mov";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -69,7 +74,16 @@ function Nav() {
 }
 
 function Hero() {
-  const videos = [heroVideo1, heroVideo2, heroVideo3];
+  const videos = [
+    heroVideo1,
+    heroVideo2,
+    heroVideo3,
+    heroVideo4,
+    heroVideo5,
+    heroVideo6,
+    heroVideo7,
+    heroVideo8,
+  ];
   const [current, setCurrent] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
