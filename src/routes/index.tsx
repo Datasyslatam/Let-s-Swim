@@ -5,7 +5,7 @@ import {
   Baby, Users, User, Check, Phone, Mail, MapPin, Facebook,
   Sparkles, Trophy, Target, Menu, X,
 } from "lucide-react";
-import heroBaby from "@/assets/hero-baby.jpg";
+import heroBaby from "@/assets/hero-baby.jpeg";
 import kidsClass from "@/assets/kids-class.jpg";
 import advanced from "@/assets/advanced.jpg";
 import events from "@/assets/events.jpg";
@@ -20,8 +20,8 @@ export const Route = createFileRoute("/")({
 });
 
 const FB_URL = "https://www.facebook.com/profile.php?id=100084339154505";
-const WHATSAPP_URL = `https://wa.me/573228302585?text=${encodeURIComponent("Hola Let's Swim, quiero más información")}`;
-const PHONE_DISPLAY = "+57 322 830 2585";
+const WHATSAPP_URL = `https://wa.me/573106017708?text=${encodeURIComponent("Hola Let's Swim, quiero más información")}`;
+const PHONE_DISPLAY = "+57 310 6017708";
 const EMAIL = "letsswimnatacion@gmail.com";
 
 function Nav() {
@@ -449,7 +449,7 @@ function ContactForm() {
       mensaje && `Mensaje: ${mensaje}`,
     ].filter(Boolean).join("\n");
 
-    window.open(`https://wa.me/573228302585?text=${encodeURIComponent(texto)}`, "_blank");
+    window.open(`https://wa.me/573106017708?text=${encodeURIComponent(texto)}`, "_blank");
   };
 
   return (
