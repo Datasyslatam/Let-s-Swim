@@ -11,14 +11,14 @@ import advanced from "@/assets/advanced.jpg";
 import events from "@/assets/events.jpg";
 import logo from "@/assets/logo.png";
 import serviceStore from "@/assets/service-store.jpg";
-import heroVideo1 from "@/assets/hero-video-1.mov";
-import heroVideo2 from "@/assets/hero-video-2.mov";
-import heroVideo3 from "@/assets/hero-video-3.mov";
-import heroVideo4 from "@/assets/hero-video-4.mov";
-import heroVideo5 from "@/assets/hero-video-5.mov";
-import heroVideo6 from "@/assets/hero-video-6.mov";
-import heroVideo7 from "@/assets/hero-video-7.mov";
-import heroVideo8 from "@/assets/hero-video-8.mov";
+import heroVideo1 from "@/assets/hero-video-1.MOV";
+import heroVideo2 from "@/assets/hero-video-2.MOV";
+import heroVideo3 from "@/assets/hero-video-3.MOV";
+import heroVideo4 from "@/assets/hero-video-4.MOV";
+import heroVideo5 from "@/assets/hero-video-5.MOV";
+import heroVideo6 from "@/assets/hero-video-6.MOV";
+import heroVideo7 from "@/assets/hero-video-7.MOV";
+import heroVideo8 from "@/assets/hero-video-8.MOV";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
