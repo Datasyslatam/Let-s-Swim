@@ -10,8 +10,7 @@ import kidsClass from "@/assets/kids-class.jpg";
 import advanced from "@/assets/advanced.jpg";
 import events from "@/assets/events.jpg";
 import logo from "@/assets/logo.png";
-import serviceStore from "@/assets/service-store.jpg";
-import heroVideo1 from "@/assets/hero-video-1.MOV";
+import serviceStore from "@/assets/service-store.jpg";import heroVideo1 from "@/assets/hero-video-1.MOV";
 import heroVideo2 from "@/assets/hero-video-2.MOV";
 import heroVideo3 from "@/assets/hero-video-3.MOV";
 import heroVideo4 from "@/assets/hero-video-4.MOV";
@@ -19,14 +18,17 @@ import heroVideo5 from "@/assets/hero-video-5.MOV";
 import heroVideo6 from "@/assets/hero-video-6.MOV";
 import heroVideo7 from "@/assets/hero-video-7.MOV";
 import heroVideo8 from "@/assets/hero-video-8.MOV";
-import carouselVideo1 from "@/assets/carousel-video-1.MOV";
-import carouselVideo2 from "@/assets/carousel-video-2.MOV";
-import carouselVideo3 from "@/assets/carousel-video-3.MOV";
-import carouselVideo4 from "@/assets/carousel-video-4.MOV";
-import carouselVideo5 from "@/assets/carousel-video-5.MOV";
-import carouselVideo6 from "@/assets/carousel-video-6.MOV";
-import carouselVideo7 from "@/assets/carousel-video-7.MOV";
-import carouselVideo8 from "@/assets/carousel-video-8.MOV";
+import carouselImg1 from "@/assets/carousel-img-1.jpg";
+import carouselImg2 from "@/assets/carousel-img-2.jpg";
+import carouselImg3 from "@/assets/carousel-img-3.jpg";
+import carouselImg4 from "@/assets/carousel-img-4.jpg";
+import carouselImg5 from "@/assets/carousel-img-5.jpg";
+import carouselImg6 from "@/assets/carousel-img-6.jpg";
+import carouselImg7 from "@/assets/carousel-img-7.jpg";
+import carouselImg8 from "@/assets/carousel-img-8.jpg";
+import carouselImg9 from "@/assets/carousel-img-9.jpg";
+import carouselImg10 from "@/assets/carousel-img-10.jpg";
+import VideoMerge from "@/assets/VideoMerge.mp4";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -82,57 +84,20 @@ function Nav() {
 }
 
 function Hero() {
-  const videos = [
-    heroVideo1, heroVideo2, heroVideo3, heroVideo4,
-    heroVideo5, heroVideo6, heroVideo7, heroVideo8,
-  ];
-  const [current, setCurrent] = useState(0);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent(prev => (prev + 1) % videos.length);
-    }, 5500);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    videoRefs.current.forEach((vid, i) => {
-      if (!vid) return;
-      vid.playbackRate = 1.25;
-      if (i === current) {
-        vid.play().catch(() => {});
-      } else {
-        vid.pause();
-      }
-    });
-  }, [current]);
-
   return (
     <section id="top" className="relative pt-16 overflow-hidden min-h-[100svh] lg:min-h-[90vh] flex items-center">
-      {videos.map((src, i) => (
-        <video
-          key={src}
-          ref={(el) => { videoRefs.current[i] = el; }}
-          src={src}
-          autoPlay={i === current}
-          muted
-          loop
-          playsInline
-          className={`hero-video absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out bg-black ${i === current ? "opacity-100 scale-105" : "opacity-0 scale-100"}`}
-        />
-      ))}
+      <video
+        src={VideoMerge}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" />
       <div className="absolute inset-0 bg-black/30 lg:bg-transparent" />
-      <div className="absolute bottom-16 lg:bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-        {videos.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`h-2 rounded-full transition-all duration-500 ${i === current ? "w-10 bg-white" : "w-3 bg-white/50"}`}
-          />
-        ))}
-      </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 py-10 lg:py-24 w-full mt-4 lg:mt-0">
         <div className="max-w-3xl">
           <span className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border border-white/30 shadow-lg">
@@ -157,7 +122,7 @@ function Hero() {
           <div className="mt-8 sm:mt-10 grid grid-cols-3 gap-3 sm:gap-6 max-w-md pb-8 lg:pb-0">
             {[
               { n: "6m+", l: "Desde bebés" },
-              { n: "3", l: "Niveles" },
+              { n: "3",   l: "Niveles" },
               { n: "100%", l: "Profesional" },
             ].map(s => (
               <div key={s.l}>
@@ -168,6 +133,7 @@ function Hero() {
           </div>
         </div>
       </div>
+
       <div className="absolute bottom-0 w-full z-10">
         <WaveDivider />
       </div>
@@ -419,186 +385,49 @@ function CTA() {
   );
 }
 
-// Extrae el primer frame del video usando canvas para evitar problemas de caché del browser
-function VideoThumbnail({ src, className }: { src: string; className: string }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const video = document.createElement("video");
-    video.src = src;
-    video.muted = true;
-    video.playsInline = true;
-    video.crossOrigin = "anonymous";
-
-    const onSeeked = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      canvas.width = video.videoWidth || 320;
-      canvas.height = video.videoHeight || 568;
-      const ctx = canvas.getContext("2d");
-      if (ctx) ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      video.removeEventListener("seeked", onSeeked);
-    };
-
-    const onLoadedMetadata = () => {
-      video.currentTime = 0.5;
-    };
-
-    video.addEventListener("loadedmetadata", onLoadedMetadata);
-    video.addEventListener("seeked", onSeeked);
-    video.load();
-
-    return () => {
-      video.removeEventListener("loadedmetadata", onLoadedMetadata);
-      video.removeEventListener("seeked", onSeeked);
-      video.src = "";
-    };
-  }, [src]);
-
-  return <canvas ref={canvasRef} className={className} />;
-}
-
 function VideoCarousel() {
-  const videos = [
-    carouselVideo1, carouselVideo2, carouselVideo3, carouselVideo4,
-    carouselVideo5, carouselVideo6, carouselVideo7, carouselVideo8,
-  ];
-  const [current, setCurrent] = useState(0);
-  const [showFirst, setShowFirst] = useState(true);
-  const [firstSrc, setFirstSrc] = useState(videos[0]);
-  const [secondSrc, setSecondSrc] = useState(videos[0]);
-  const [isFading, setIsFading] = useState(false);
-
-  const changeVideo = (index: number) => {
-    if (index === current || isFading) return;
-    setIsFading(true);
-    if (showFirst) setSecondSrc(videos[index]);
-    else setFirstSrc(videos[index]);
-    window.setTimeout(() => {
-      setCurrent(index);
-      setShowFirst((prev) => !prev);
-      setIsFading(false);
-    }, 750);
-  };
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      changeVideo((current + 1) % videos.length);
-    }, 6000);
-    return () => window.clearInterval(timer);
-  }, [current, isFading, showFirst]);
-
-  const N = videos.length;
-  const videoAVisible = showFirst ? !isFading : isFading;
-  const videoBVisible = showFirst ? isFading : !isFading;
-  const mainTransition = "absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out";
-
-  const sideVideos = [
-    { idx: (current - 3 + N) % N, side: "left",  blur: "blur-[5px]",   opacity: "opacity-30", scale: "scale-90",  size: "h-24"  },
-    { idx: (current - 2 + N) % N, side: "left",  blur: "blur-[3.5px]", opacity: "opacity-50", scale: "scale-95",  size: "h-32"  },
-    { idx: (current - 1 + N) % N, side: "left",  blur: "blur-[2px]",   opacity: "opacity-75", scale: "scale-100", size: "h-44"  },
-    { idx: (current + 1)     % N, side: "right", blur: "blur-[2px]",   opacity: "opacity-75", scale: "scale-100", size: "h-44"  },
-    { idx: (current + 2)     % N, side: "right", blur: "blur-[3.5px]", opacity: "opacity-50", scale: "scale-95",  size: "h-32"  },
-    { idx: (current + 3)     % N, side: "right", blur: "blur-[5px]",   opacity: "opacity-30", scale: "scale-90",  size: "h-24"  },
+  const images = [
+    carouselImg1, carouselImg2, carouselImg3, carouselImg4,
+    carouselImg5, carouselImg6, carouselImg7, carouselImg8,
+    carouselImg9, carouselImg10,
   ];
 
-  const leftSides  = sideVideos.filter(v => v.side === "left");
-  const rightSides = sideVideos.filter(v => v.side === "right");
+  const doubled = [...images, ...images];
 
   return (
-    <section id="videos" className="py-20 lg:py-28 bg-white text-slate-950 overflow-hidden">
-      <div className="max-w-screen-2xl mx-auto px-4 lg:px-6">
-        <div className="flex items-center gap-3 lg:gap-4">
-
-          {/* Videos izquierda */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
-            {leftSides.map(({ idx, blur, opacity, scale, size }) => (
-              <button
-                key={`left-${idx}`}
-                onClick={() => changeVideo(idx)}
-                className={`group relative rounded-2xl overflow-hidden border border-slate-200 flex-shrink-0 w-28 xl:w-32 ${size} ${opacity} transition-all duration-500 hover:opacity-90 focus:outline-none`}
-              >
-                <VideoThumbnail
-                  src={videos[idx]}
-                  className={`w-full h-full object-cover ${blur} brightness-75 ${scale} transition-all duration-500 group-hover:blur-0 group-hover:brightness-90`}
-                />
-              </button>
-            ))}
-          </div>
-
-          {/* Video principal */}
-          <div className="relative overflow-hidden rounded-2xl flex-shrink-0 mx-auto
-                          w-full max-w-sm h-[600px] lg:h-[780px] bg-black">
-            <video
-              src={firstSrc}
-              autoPlay muted loop playsInline
-              className={`${mainTransition} ${
-                videoAVisible
-                  ? "opacity-100 scale-100 blur-0"
-                  : "opacity-0 scale-110 blur-sm pointer-events-none"
-              }`}
+    <section
+      id="videos"
+      className="py-20 lg:py-28 bg-white overflow-hidden"
+    >
+      <div
+        className="flex gap-4"
+        style={{
+          width: "max-content",
+          animation: "scroll-carousel 45s linear infinite",
+        }}
+      >
+        {doubled.map((src, i) => (
+          <div
+            key={i}
+            className="rounded-2xl overflow-hidden flex-shrink-0 border border-slate-100"
+            style={{ width: 300, height: 420 }}
+          >
+            <img
+              src={src}
+              alt={`Foto ${(i % images.length) + 1}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
             />
-            <video
-              src={secondSrc}
-              autoPlay muted loop playsInline
-              className={`${mainTransition} ${
-                videoBVisible
-                  ? "opacity-100 scale-100 blur-0"
-                  : "opacity-0 scale-110 blur-sm pointer-events-none"
-              }`}
-            />
-            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-5 flex items-center justify-between px-5">
-              <button
-                onClick={() => changeVideo((current - 1 + N) % N)}
-                className="rounded-full bg-white/90 p-3 text-slate-950 shadow-lg border border-slate-200
-                           hover:bg-white hover:scale-105 active:scale-95 transition-all duration-200"
-              >
-                <ChevronLeft size={22} />
-              </button>
-              <div className="flex items-center gap-2">
-                {videos.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => changeVideo(index)}
-                    className={`rounded-full transition-all duration-300 ${
-                      current === index
-                        ? "bg-white w-6 h-2.5"
-                        : "bg-white/50 hover:bg-white/70 w-2.5 h-2.5"
-                    }`}
-                  >
-                    <span className="sr-only">Video {index + 1}</span>
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => changeVideo((current + 1) % N)}
-                className="rounded-full bg-white/90 p-3 text-slate-950 shadow-lg border border-slate-200
-                           hover:bg-white hover:scale-105 active:scale-95 transition-all duration-200"
-              >
-                <ChevronRight size={22} />
-              </button>
-            </div>
           </div>
-
-          {/* Videos derecha */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3 flex-shrink-0">
-            {rightSides.map(({ idx, blur, opacity, scale, size }) => (
-              <button
-                key={`right-${idx}`}
-                onClick={() => changeVideo(idx)}
-                className={`group relative rounded-2xl overflow-hidden border border-slate-200 flex-shrink-0 w-28 xl:w-32 ${size} ${opacity} transition-all duration-500 hover:opacity-90 focus:outline-none`}
-              >
-                <VideoThumbnail
-                  src={videos[idx]}
-                  className={`w-full h-full object-cover ${blur} brightness-75 ${scale} transition-all duration-500 group-hover:blur-0 group-hover:brightness-90`}
-                />
-              </button>
-            ))}
-          </div>
-
-        </div>
+        ))}
       </div>
+
+      <style>{`
+        @keyframes scroll-carousel {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
   );
 }
