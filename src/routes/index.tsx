@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
+import emailjs from "@emailjs/browser";
 import {
   Waves, Shield, GraduationCap, Heart, PartyPopper, ShoppingBag,
   Baby, Users, User, Check, Phone, Mail, MapPin, Facebook,
@@ -447,40 +448,98 @@ function ContactForm() {
   const [telefono, setTelefono] = useState("");
   const [edad, setEdad] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const texto = [
-      `Hola Let's Swim, quiero más información.`,
-      nombre && `Nombre: ${nombre}`,
-      telefono && `Teléfono: ${telefono}`,
-      edad && `Edad del alumno: ${edad}`,
-      mensaje && `Mensaje: ${mensaje}`,
-    ].filter(Boolean).join("\n");
-    window.open(`https://wa.me/573106017708?text=${encodeURIComponent(texto)}`, "_blank");
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setStatus("sending");
+
+  const whatsapp_reply = encodeURIComponent(
+    `Hola ${nombre}, soy de Let's Swim. Vi tu solicitud y quería ponerme en contacto contigo para darte más información sobre nuestras clases. ¿Tienes un momento?`
+  );
+
+  const telefonoLimpio = telefono.replace(/\D/g, "");
+
+  try {
+    await emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        nombre,
+        telefono: telefonoLimpio,
+        edad,
+        mensaje,
+        whatsapp_reply,
+        year: new Date().getFullYear(),
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    );
+
+    setStatus("ok");
+    setNombre("");
+    setTelefono("");
+    setEdad("");
+    setMensaje("");
+  } catch {
+    setStatus("error");
+  }
+};
 
   return (
-    <form onSubmit={handleSubmit}
-      className="bg-gradient-to-br from-sky-50 to-cyan-50 rounded-3xl p-7 lg:p-9 border border-primary/10 shadow-sm">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-gradient-to-br from-sky-50 to-cyan-50 rounded-3xl p-7 lg:p-9 border border-primary/10 shadow-sm"
+    >
       <h3 className="text-xl font-bold text-foreground">Reserva tu clase de prueba</h3>
       <div className="mt-6 space-y-4">
         <Field label="Nombre completo" type="text" placeholder="Tu nombre"
-          value={nombre} onChange={(e) => setNombre(e.target.value)} />
-        <Field label="Teléfono" type="tel" placeholder="+57 ..."
-          value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+          value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+        <Field
+          label="Teléfono"
+          type="tel"
+          placeholder="300 ......"
+          value={telefono}
+          onChange={(e) => {
+            const soloNumeros = e.target.value.replace(/\D/g, "");
+            if (soloNumeros.length <= 10) setTelefono(soloNumeros);
+          }}
+          inputMode="numeric"
+          pattern="[0-9]{10}"
+          minLength={10}
+          maxLength={10}
+          required
+        />
         <Field label="Edad del alumno" type="text" placeholder="Ej. 5 años"
           value={edad} onChange={(e) => setEdad(e.target.value)} />
         <div>
           <label className="text-sm font-medium text-foreground/80">Mensaje</label>
-          <textarea rows={3} placeholder="Cuéntanos qué necesitas"
-            value={mensaje} onChange={(e) => setMensaje(e.target.value)}
-            className="mt-1.5 w-full rounded-xl border border-border bg-white px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+          <textarea
+            rows={3}
+            placeholder="Cuéntanos qué necesitas"
+            value={mensaje}
+            onChange={(e) => setMensaje(e.target.value)}
+            className="mt-1.5 w-full rounded-xl border border-border bg-white px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+          />
         </div>
-        <button type="submit"
-          className="w-full bg-primary text-primary-foreground py-3.5 rounded-full font-semibold hover:bg-primary/90 transition shadow-lg shadow-primary/25">
-          Enviar solicitud
+
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="w-full bg-primary text-primary-foreground py-3.5 rounded-full font-semibold hover:bg-primary/90 transition shadow-lg shadow-primary/25 disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {status === "sending" ? "Enviando..." : "Enviar solicitud"}
         </button>
+
+        {status === "ok" && (
+          <p className="text-green-600 text-sm text-center font-medium">
+            ✅ Mensaje enviado. Te contactaremos pronto.
+          </p>
+        )}
+        {status === "error" && (
+          <p className="text-red-500 text-sm text-center font-medium">
+            ❌ Hubo un error al enviar. Por favor intenta de nuevo.
+          </p>
+        )}
       </div>
     </form>
   );
