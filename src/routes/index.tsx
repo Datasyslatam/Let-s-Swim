@@ -3,15 +3,22 @@ import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import {
   Waves, Shield, GraduationCap, Heart, PartyPopper, ShoppingBag,
-  Baby, Users, User, Check, Phone, Mail, MapPin, Facebook,
+  Baby, Users, User, Check, Phone, Mail, MapPin, Facebook, Instagram,
   Sparkles, Trophy, Target, ChevronLeft, ChevronRight, Menu, X,
 } from "lucide-react";
 import heroBaby from "@/assets/hero-baby.jpeg";
 import kidsClass from "@/assets/kids-class.jpg";
 import advanced from "@/assets/advanced.jpg";
+import advanced2 from "@/assets/advanced2.jpg";
+import advanced3 from "@/assets/advanced3.jpg";
+import advanced4 from "@/assets/advanced4.jpg";
+import advanced5 from "@/assets/advanced5.jpg";
+import fq3 from "@/assets/fq3.jpg";
 import events from "@/assets/events.jpg";
 import logo from "@/assets/logo.png";
 import serviceStore from "@/assets/service-store.jpg";import heroVideo1 from "@/assets/hero-video-1.MOV";
+import natacion from "@/assets/natacion.jpg";
+import desarrollo from "@/assets/desarrollo.jpg";
 import heroVideo2 from "@/assets/hero-video-2.MOV";
 import heroVideo3 from "@/assets/hero-video-3.MOV";
 import heroVideo4 from "@/assets/hero-video-4.MOV";
@@ -36,6 +43,7 @@ export const Route = createFileRoute("/")({
 });
 
 const FB_URL = "https://www.facebook.com/profile.php?id=100084339154505";
+const INSTAGRAM_URL = "https://www.instagram.com/escueladenatacion_letsswim/";
 const WHATSAPP_URL = `https://wa.me/573106017708?text=${encodeURIComponent("Hola Let's Swim, quiero más información")}`;
 const PHONE_DISPLAY = "+57 310 6017708";
 const EMAIL = "letsswimnatacion@gmail.com";
@@ -53,9 +61,9 @@ function Nav() {
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 bg-white/55 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between h-24">
           <a href="#top" className="flex items-center gap-3 relative group">
-            <img src={logo} alt="Let's Swim logo" width={56} height={56} className="h-14 w-14 object-contain rounded-xl bg-white shadow-md p-1 group-hover:scale-105 transition-transform duration-300" />
+            <img src={logo} alt="Let's Swim logo" width={80} height={80} className="h-20 w-20 object-contain rounded-xl bg-white shadow-md p-1 group-hover:scale-105 transition-transform duration-300" />
             <div className="flex flex-col">
               <span className="text-xs text-foreground/60 font-medium">Escuela de natación</span>
               <span className="font-bold text-lg text-primary tracking-tight">Let's Swim Barranquilla</span>
@@ -107,8 +115,8 @@ function Hero() {
           <h1 className="mt-4 sm:mt-5 text-[2.1rem] leading-[1.1] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white lg:leading-[1.05] drop-shadow-md">
             Un niño que aprende a nadar, <span className="text-cyan-300">es un niño sin temores.</span>
           </h1>
-          <p className="mt-4 sm:mt-6 text-base sm:text-lg text-white/90 max-w-xl leading-relaxed drop-shadow">
-            Formación acuática integral desde los <strong>6 meses</strong>, liderada exclusivamente por entrenadores profesionales certificados en pedagogía infantil, educación física y entrenamiento deportivo.
+          <p className="mt-4 sm:mt-7 text-base sm:text-lg text-white/90 max-w-xl leading-relaxed drop-shadow">
+            Formación acuática integral desde los <strong>6 meses</strong>, nuestro modelo <span className="text-cyan-300">Let’s Swim</span> se enfoca pedagógicamente en estimulación temprana, la adaptación, 5 estilos de carrera y entrenamiento de alto rendimiento.
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer"
@@ -180,21 +188,20 @@ function MissionCard({ icon, title, text }: { icon: React.ReactNode; title: stri
 function Modalities() {
   const items = [
     { icon: <Users size={28} />, title: "Personalizadas", desc: "Flexibilidad y atención compartida en grupos muy reducidos, garantizando un alto estándar de cuidado y progreso." },
-    { icon: <User size={28} />, title: "Individuales", desc: "Enfoque 100% exclusivo con un profesional dedicado a acelerar el aprendizaje y maximizar la autoconfianza." },
     { icon: <Users size={28} />, title: "Grupales", desc: "Espacios dinámicos e interactivos, ideales para motivarse en equipo, socializar y aprender en un entorno seguro." },
   ];
   return (
     <section id="modalidades" className="py-20 lg:py-28 bg-gradient-to-b from-white to-sky-50">
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">Modalidades de clase</span>
+          <span className="text-primary font-semibold text-sm uppercase tracking-wider">Servicio a domicilio o en nuestra sede norte</span>
           <h2 className="mt-3 text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground">Elige cómo quieres aprender</h2>
-          <p className="mt-4 text-foreground/70">Cada proceso es único y cuenta con la supervisión directa de nuestros profesionales.</p>
+          <p className="mt-4 text-foreground/70">Cada proceso es único y cuenta con la supervisión permanente de nuestros profesionales. </p>
         </div>
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
+        <div className="mt-12 flex flex-col md:flex-row justify-center gap-6 max-w-4xl mx-auto">
           {items.map(it => (
-            <div key={it.title} className="group bg-white rounded-3xl p-7 border border-border hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <div className="bg-primary/10 text-primary w-14 h-14 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition">
+            <div key={it.title} className="flex-1 group bg-white rounded-3xl p-7 border border-border hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+              <div className="bg-primary/10 text-primary w-14 h-14 rounded-2xl flex items-center justify-center mb-5 mx-auto group-hover:bg-primary group-hover:text-white transition">
                 {it.icon}
               </div>
               <h3 className="text-xl font-bold text-foreground">{it.title}</h3>
@@ -210,19 +217,39 @@ function Modalities() {
 function Levels() {
   const levels = [
     {
-      n: "01", title: "Nivel Básico", tag: "Seguridad en el Agua", img: heroBaby,
-      desc: "El punto de partida fundamental. Adaptación al medio acuático, flotación y técnicas esenciales de supervivencia. El primer gran paso para nadar sin temores.",
-      bullets: ["Adaptación al agua", "Flotación", "Supervivencia acuática"],
+      n: "01", title: "Estimulación temprana", tag: "Nivel 1", img: heroBaby,
+      desc: "Desarrollo motriz y cognitivo para niños de primera infancia desde los 6 meses hasta los 3 años.",
+      bullets: [],
     },
     {
-      n: "02", title: "Nivel Medio", tag: "Recreación y Bienestar", img: kidsClass,
-      desc: "Para quienes ya dominan la flotación y buscan perfeccionar estilos, utilizando la natación como herramienta recreativa, de salud mental y bienestar físico.",
-      bullets: ["Perfeccionamiento de estilos", "Salud mental", "Bienestar físico"],
+      n: "02", title: "Adaptación al agua", tag: "Nivel 2", img: fq3,
+      desc: "Es tu primer paso para estar seguro en el agua, desarrollamos habilidades y bienestar físico.",
+      bullets: ["Flotación", "Burbuja", "Inmersión", "Saltos", "Desplazamientos"],
     },
     {
-      n: "03", title: "Nivel Avanzado", tag: "Acondicionamiento Competitivo", img: advanced,
-      desc: "Diseñado para nadadores que buscan exigencia técnica, resistencia, alto rendimiento y preparación para retos deportivos bajo dirección metodológica profesional.",
-      bullets: ["Alto rendimiento", "Técnica avanzada", "Preparación competitiva"],
+      n: "03", title: "Estilo libre", tag: "Nivel 3", img: advanced,
+      desc: "Aprendemos las técnicas y habilidades físicas de los movimientos específicos del ESTILO CROLL.",
+      bullets: [],
+    },
+    {
+      n: "04", title: "Estilo espalda", tag: "Nivel 4", img: advanced2,
+      desc: "Fortalecemos tus habilidades acuáticas mediante el aprendizaje y práctica de los movimientos específicos del ESTILO DORSO.",
+      bullets: [],
+    },
+    {
+      n: "05", title: "Estilo pecho", tag: "Nivel 5", img: advanced3,
+      desc: "Desarrollamos la técnica del estilo pecho, mejorando la coordinación entre brazos, piernas y respiración para lograr un desplazamiento eficiente en el agua.",
+      bullets: [],
+    },
+    {
+      n: "06", title: "Estilo mariposa", tag: "Nivel 6", img: advanced4,
+      desc: "Afianzamos la ejecución técnica del estilo mariposa mediante ejercicios que favorecen el control corporal, la potencia y el ritmo de nado.",
+      bullets: [],
+    },
+    {
+      n: "07", title: "Entrenamiento de alto rendimiento", tag: "Nivel 7", img: advanced5,
+      desc: "Desarrollamos las técnicas fundamentales y avanzadas de clavados, fortaleciendo la precisión, la coordinación y la seguridad en la ejecución.",
+      bullets: [],
     },
   ];
   return (
@@ -230,7 +257,7 @@ function Levels() {
       <div className="max-w-6xl mx-auto px-5 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">Formación escalonada</span>
-          <h2 className="mt-3 text-3xl lg:text-4xl font-extrabold tracking-tight">Tres niveles diseñados científicamente</h2>
+          <h2 className="mt-3 text-3xl lg:text-4xl font-extrabold tracking-tight">Siete niveles diseñados científicamente</h2>
           <p className="mt-4 text-foreground/70">Guiamos a nuestros alumnos paso a paso a través de metas claras.</p>
         </div>
         <div className="mt-14 space-y-16">
@@ -265,20 +292,20 @@ function Levels() {
 function Services() {
   const services = [
     {
-      icon: <GraduationCap />, title: "Escuela de Natación", img: kidsClass,
+      icon: <GraduationCap />, title: "Escuela de Natación", img: natacion,
       points: ["Bebés desde 6 meses, niños, jóvenes y adultos", "Asesoría pedagógica continua profesional", "3 niveles formativos en la modalidad que elijas"],
     },
     {
-      icon: <Heart />, title: "Desarrollo Integral y Salud", img: heroBaby,
+      icon: <Heart />, title: "Desarrollo Integral y Salud", img: desarrollo,
       points: ["Estimulación temprana desde los 6 meses", "Programas para superar el miedo al agua", "Habilidades motrices: coordinación y agilidad"],
     },
     {
       icon: <PartyPopper />, title: "Recreación y Eventos", img: events,
-      points: ["Cursos vacacionales acuáticos", "Fiestas y celebraciones infantiles", "Planes: Básico, Estándar y Premium"],
+      points: ["Paquetes empresariales de fiestas acuáticas y en salones", "Fiestas y celebraciones infantiles", "Cursos vacacionales", "Planes: Básico, Estándar y Premium"],
     },
     {
       icon: <ShoppingBag />, title: "Tienda y Material Didáctico", img: serviceStore,
-      points: ["Equipamiento avalado por profesionales", "Accesorios para práctica cómoda y segura", "Material didáctico exclusivo de aprendizaje"],
+      points: ["Prendas de natación", "Vestidos de baños (niños, jóvenes y adultos)", "Gorros, gafas y kit de entrenamientos"],
     },
   ];
   return (
@@ -369,6 +396,10 @@ function CTA() {
             className="bg-white/15 backdrop-blur border-2 border-white/40 text-white px-8 py-4 rounded-full font-bold hover:bg-white/25 transition inline-flex items-center gap-2">
             <Facebook size={20} /> Síguenos en Facebook
           </a>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer"
+            className="bg-white/15 backdrop-blur border-2 border-white/40 text-white px-8 py-4 rounded-full font-bold hover:bg-white/25 transition inline-flex items-center gap-2">
+            <Instagram size={20} /> Síguenos en Instagram
+          </a>
         </div>
       </div>
     </section>
@@ -435,6 +466,7 @@ function Contact() {
             <ContactRow icon={<Phone />} title="Teléfono / WhatsApp" text={PHONE_DISPLAY} href={WHATSAPP_URL} />
             <ContactRow icon={<Mail />} title="Correo" text={EMAIL} href={`mailto:${EMAIL}`} />
             <ContactRow icon={<Facebook />} title="Facebook" text="Let's Swim S.A.S." href={FB_URL} />
+            <ContactRow icon={<Instagram />} title="Instagram" text="@escueladenatacion_letsswim" href={INSTAGRAM_URL} />
           </div>
         </div>
         <ContactForm />
@@ -574,9 +606,9 @@ function Footer() {
     <footer className="bg-foreground text-white/70 py-12">
       <div className="max-w-6xl mx-auto px-5 lg:px-8 grid md:grid-cols-3 gap-8">
         <div>
-          <div className="flex items-center gap-2">
-            <img src={logo} alt="Let's Swim" width={36} height={36} className="h-9 w-9 bg-white rounded-lg p-1" />
-            <span className="font-bold text-white text-lg">Let's Swim S.A.S.</span>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="Let's Swim" width={64} height={64} className="h-16 w-16 bg-white rounded-xl p-1.5" />
+            <span className="font-bold text-white text-xl">Let's Swim S.A.S.</span>
           </div>
           <p className="mt-4 text-sm italic">"Un niño que aprende a nadar, es un niño sin temores."</p>
         </div>
@@ -591,10 +623,15 @@ function Footer() {
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3">Síguenos</h4>
-          <a href={FB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-white">
-            <Facebook size={18} /> Facebook
-          </a>
-          <p className="mt-4 text-xs">Barranquilla, Colombia</p>
+          <div className="flex flex-col gap-2">
+            <a href={FB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-white transition">
+              <Facebook size={18} /> Facebook
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-white transition">
+              <Instagram size={18} /> Instagram
+            </a>
+          </div>
+          <p className="mt-5 text-xs text-white/60">Barranquilla, Colombia</p>
         </div>
       </div>
       <div className="border-t border-white/10 mt-10 pt-6 text-center text-xs">
@@ -637,9 +674,9 @@ function LandingPage() {
         <Modalities />
         <Levels />
         <Services />
-        <Principles />
         <CTA />
         <VideoCarousel />
+        <Principles />
         <Contact />
       </main>
       <Footer />
