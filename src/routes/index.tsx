@@ -35,7 +35,6 @@ import carouselImg6 from "@/assets/carousel-img-6.jpeg";
 import carouselImg7 from "@/assets/carousel-img-7.jpg";
 import carouselImg8 from "@/assets/carousel-img-8.jpg";
 import carouselImg9 from "@/assets/carousel-img-9.jpg";
-import carouselImg10 from "@/assets/carousel-img-10.jpg";
 import VideoMerge from "@/assets/VideoMerge.mp4";
 
 export const Route = createFileRoute("/")({
@@ -61,9 +60,9 @@ function Nav() {
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 bg-white/55 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between h-24">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between h-28">
           <a href="#top" className="flex items-center gap-3 relative group">
-            <img src={logo} alt="Let's Swim logo" width={80} height={80} className="h-20 w-20 object-contain rounded-xl bg-white shadow-md p-1 group-hover:scale-105 transition-transform duration-300" />
+            <img src={logo} alt="Let's Swim logo" width={96} height={96} className="h-24 w-24 object-contain rounded-xl bg-white shadow-md p-1 group-hover:scale-105 transition-transform duration-300" />
             <div className="flex flex-col">
               <span className="text-xs text-foreground/60 font-medium">Escuela de natación</span>
               <span className="font-bold text-lg text-primary tracking-tight">Let's Swim Barranquilla</span>
@@ -159,7 +158,7 @@ function About() {
             Confianza y seguridad construidas con responsabilidad
           </h2>
           <p className="mt-5 text-foreground/70 leading-relaxed">
-            En <strong>Let's Swim S.A.S.</strong> ayudamos a los más pequeños a crecer con total confianza, iniciando este hermoso vínculo desde sus primeros meses de vida. Todo nuestro servicio es brindado exclusivamente por un equipo de entrenadores profesionales altamente calificados.
+            En <strong>Let's Swim </strong> ayudamos a los más pequeños a crecer con total confianza, iniciando este hermoso vínculo desde sus primeros meses de vida. Todo nuestro servicio es brindado exclusivamente por un equipo de entrenadores profesionales altamente calificados.
           </p>
           <div className="mt-8 grid sm:grid-cols-2 gap-4">
             <MissionCard icon={<Target />} title="Misión"
@@ -410,7 +409,7 @@ function VideoCarousel() {
   const images = [
     carouselImg1, carouselImg2, carouselImg3, carouselImg4,
     carouselImg5, carouselImg6, carouselImg7, carouselImg8,
-    carouselImg9, carouselImg10,
+    carouselImg9,
   ];
 
   const doubled = [...images, ...images];
@@ -608,7 +607,7 @@ function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <img src={logo} alt="Let's Swim" width={64} height={64} className="h-16 w-16 bg-white rounded-xl p-1.5" />
-            <span className="font-bold text-white text-xl">Let's Swim S.A.S.</span>
+            <span className="font-bold text-white text-xl">Let's Swim </span>
           </div>
           <p className="mt-4 text-sm italic">"Un niño que aprende a nadar, es un niño sin temores."</p>
         </div>
