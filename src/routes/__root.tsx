@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { Toaster } from "sonner";
+import logo from "@/assets/logo.png";
 
 import appCss from "../styles.css?url";
 
@@ -86,6 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@LetsSwim" },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: logo },
       { rel: "canonical", href: "https://escuelaletsswim.com" },
       {
         rel: "stylesheet",
