@@ -73,6 +73,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "BIH49Nj8FVFebJs4xAJySztQ94qjnR_2lH5aLt6y30U" },
       { title: "Let's Swim — Escuela de Natación en Barranquilla" },
       { name: "description", content: "Formación acuática profesional desde los 6 meses. Clases grupales, personalizadas e individuales con entrenadores certificados en Barranquilla." },
       { name: "keywords", content: "escuela de natación, natación barranquilla, clases de natación, natación para bebés, let's swim, aprender a nadar, natación niños" },
